@@ -15,7 +15,7 @@ setup_nginx()
         if [ ! -f "/etc/ssl/private/ttrss.key" ]; then
             echo "Setup: Generating self-signed certificate ..."
             # Generate the TLS certificate for our Tiny Tiny RSS server instance.
-            openssl req -new -newkey rsa:2048 -days 3650 -nodes -x509 \
+            openssl req -new -newkey rsa:4096 -days 3650 -nodes -x509 \
                 -subj "/C=US/ST=World/L=World/O=$TTRSS_HOST/CN=$TTRSS_HOST" \
                 -keyout "/etc/ssl/private/ttrss.key" \
                 -out "/etc/ssl/certs/ttrss.crt"
@@ -64,7 +64,6 @@ setup_ttrss()
             git clone --depth=1 ${TTRSS_REPO_URL} ${TTRSS_PATH}
         fi
         git clone --depth=1 https://github.com/sepich/tt-rss-mobilize.git ${TTRSS_PATH}/plugins/mobilize
-        git clone --depth=1 https://github.com/hrk/tt-rss-newsplus-plugin.git ${TTRSS_PATH}/plugins/api_newsplus
         git clone --depth=1 https://github.com/m42e/ttrss_plugin-feediron.git ${TTRSS_PATH}/plugins/feediron
         git clone --depth=1 https://github.com/levito/tt-rss-feedly-theme.git ${TTRSS_PATH}/themes/feedly-git
 	git clone --depth=1 https://github.com/CorePoint/ttrss-breeze-theme.git ${TTRSS_PATH}/themes/breeze-git
@@ -78,9 +77,9 @@ setup_ttrss()
         TTRSS_URL=localhost
     fi
 
-    # Tweak TTRSS_PORT, if defined.
-    if [ -n "$TTRSS_PORT" ]; then
-        TTRSS_PORT=:${TTRSS_PORT}
+    # Check if TTRSS_PORT is undefined, and if so, use 8888 as default.
+    if [ -z ${TTRSS_PORT} ]; then
+        TTRSS_PORT=8888
     fi
 
     if [ "$TTRSS_WITH_SELFSIGNED_CERT" = "1" ]; then
@@ -94,7 +93,7 @@ setup_ttrss()
         TTRSS_PROTO=http
     fi
 
-    # Add a leading colon (for the final URL) if a custom port is set.
+    # Add a leading colon (for the final URL) to the port.
     if [ -n "$TTRSS_PORT" ]; then
         TTRSS_PORT=:${TTRSS_PORT}
     fi
@@ -114,12 +113,11 @@ setup_ttrss()
     # Enable additional system plugins.
     if [ -z ${TTRSS_PLUGINS} ]; then
 
-        # api_newsplus (API for News+ Android App).
-        TTRSS_PLUGINS=api_newsplus
+        TTRSS_PLUGINS=
 
         # Only if SSL/TLS is enabled: af_zz_imgproxy (Loads insecure images via built-in proxy).
         if [ "$TTRSS_PROTO" = "https" ]; then
-            TTRSS_PLUGINS=${TTRSS_PLUGINS},af_zz_imgproxy
+            TTRSS_PLUGINS=${TTRSS_PLUGINS}af_zz_imgproxy
         fi
     fi
 
