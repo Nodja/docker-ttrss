@@ -41,7 +41,7 @@ Just start up a new database container:
 Next, run the actual TT-RSS instance by doing a:
 
 ```bash
-# docker run -d --link $DB:db -p 8888:8080 --name ttrss x86dev/docker-ttrss
+# docker run -d --link $DB:db -e TTRSS_PORT=8080 --name ttrss x86dev/docker-ttrss
 ```
 
 Running this command for the first time will download the image automatically.
@@ -49,10 +49,10 @@ Running this command for the first time will download the image automatically.
 
 ## Accessing your Tiny Tiny RSS (TT-RSS)
 
-The above example exposes the TT-RSS web interface on port 8888 (http), so that you can browse to:
+The above example exposes the TT-RSS web interface on port 8080 (http / unencrypted), so that you can browse to:
 
 ```bash
-http://localhost:8888
+http://localhost:8080
 ```
 
 The default login credentials are:
@@ -82,9 +82,9 @@ A nice thing to have is jwilder's [nginx-proxy](https://github.com/jwilder/nginx
 Docker container running on the same machine as this one.
 
 That way you easily can integrate your TT-RSS instance with an existing domain by using a sub domain
-(e.g. https://ttrss.yourdomain.tld). 
+(e.g. https://ttrss.yourdomain.tld).
 
-### Enabling SSL/TLS encryption support 
+### Enabling SSL/TLS encryption support
 
 In combination with an official Let's Encrypt certificate you
 can get a nice A+ encryption/security rating over at [SSLLabs](https://www.ssllabs.com/ssltest/).
@@ -120,7 +120,7 @@ This is particular useful for your initial database setup, as errors get reporte
 the console and further execution will halt.
 
 ```bash
-# docker run -it --link ttrss-data:db --name ttrss x86dev/docker-ttrss
+# docker run -it -e TTRSS_PORT=8080 --link ttrss-data:db --name ttrss x86dev/docker-ttrss
 ```
 
 ### Database configuration
@@ -169,6 +169,11 @@ minimum:
 ```
 ## Useful stuff to know
 
+### Single User mode
+In case you are running behind a proxy that has basic auth and you do not wish to use
+ttrss auth, you can set the enviroment variable TTRSS_SINGLEUSER to true and it
+will change the setup to single user mode
+
 ### Backing up / moving to another server
 
 Decided to back up your data container and/or move to another server? Here's how
@@ -203,11 +208,11 @@ this container takes the burden any checks for updates of TT-RSS and the accompa
 plugins/themes every day via an own update script (see `root/srv/update-ttrss.sh`).
 
 By default the update script checks every 24 hours if there are updates for TT-RSS,
-the plugins or the theme(s) available. 
+the plugins or the theme(s) available.
 
-If you want to change the update interval you just need to edit the file 
+If you want to change the update interval you just need to edit the file
 `root/etc/services.d/ttrss-updater/run` and change the `--wait-exit 24h` to fit your needs, whereas
-the suffix `h` stands for hours, `m` for minutes and `s` for seconds. 
+the suffix `h` stands for hours, `m` for minutes and `s` for seconds.
 
 
 ### Want to contribute?

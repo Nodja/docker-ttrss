@@ -77,13 +77,7 @@ setup_ttrss()
         TTRSS_URL=localhost
     fi
 
-    # Check if TTRSS_PORT is undefined, and if so, use 8888 as default.
-    if [ -z ${TTRSS_PORT} ]; then
-        TTRSS_PORT=8888
-    fi
-
     if [ "$TTRSS_WITH_SELFSIGNED_CERT" = "1" ]; then
-
         # Make sure the TTRSS protocol is https now.
         TTRSS_PROTO=https
     fi
@@ -109,6 +103,12 @@ setup_ttrss()
 
     # Patch URL path.
     sed -i -e 's@htt.*/@'"${TTRSS_SELF_URL}"'@g' ${TTRSS_PATH}/config.php
+
+    # Check if single user mode is selected
+    if [ "$TTRSS_SINGLEUSER" = true ]; then
+        echo "Single User mode Selected"
+        sed -i -e "s/.*define('SINGLE_USER_MODE'.*/define('SINGLE_USER_MODE', 'true');/g" ${TTRSS_PATH}/config.php
+    fi
 
     # Enable additional system plugins.
     if [ -z ${TTRSS_PLUGINS} ]; then
