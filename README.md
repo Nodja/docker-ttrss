@@ -2,9 +2,8 @@
 
 This Dockerfile installs Tiny Tiny RSS (TT-RSS) with the following features:
 
-- **New:** Based on [Docker-Alpine](https://github.com/gliderlabs/docker-alpine) and [s6](http://skarnet.org/software/s6/) as the supervisor
-- **New:** Small and lightweight image size (about 100 MB)
-- **New:** Added Breeze theme
+- Changes in this Fork: Added breeze theme, added np_noscroll plugin
+
 - **New:** Now using PHP 7
 - Based on [Docker-Alpine](https://github.com/gliderlabs/docker-alpine) and [s6](http://skarnet.org/software/s6/) as the supervisor
 - Small and lightweight image size (< 100 MB)
