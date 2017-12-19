@@ -42,6 +42,8 @@ update_theme_feedly()
     # Link theme to TTRSS.
     ln -f -s ${TTRSS_PATH}/themes/feedly-git/feedly ${TTRSS_PATH}/themes/feedly
     ln -f -s ${TTRSS_PATH}/themes/feedly-git/feedly.css ${TTRSS_PATH}/themes/feedly.css
+    ln -f -s ${TTRSS_PATH}/themes/feedly-git/feedly-night.css ${TTRSS_PATH}/themes/feedly-night.css
+
 }
 
 update_theme_breeze()
