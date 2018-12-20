@@ -2,9 +2,6 @@
 
 This Dockerfile installs Tiny Tiny RSS (TT-RSS) with the following features:
 
-- Changes in this Fork: Added breeze theme, added np_noscroll plugin, added feedly-night theme
-
-- **New:** Now using PHP 7
 - **New:** Integrated [Feedly-ish theme](https://github.com/Gravemind/tt-rss-feedlish-theme) for supporting latest TT-RSS versions
 - **New:** When starting the container, the default theme will be (re-)applied. This should help when a theme breaks (again)
 - Based on [Docker-Alpine](https://github.com/gliderlabs/docker-alpine) and [s6](http://skarnet.org/software/s6/) as the supervisor

@@ -15,6 +15,12 @@ update_ttrss()
     ( cd ${TTRSS_PATH} && git pull origin HEAD )
 }
 
+update_plugin_np_noscroll()
+{
+    echo "Updating: np_noscroll"
+    ( cd ${TTRSS_PATH}/plugins/np_noscroll && git pull origin HEAD )
+}
+
 update_plugin_mobilize()
 {
     echo "Updating: Mobilize plugin"
@@ -30,25 +36,9 @@ update_plugin_feediron()
     ( cd ${TTRSS_PATH_PLUGINS}/feediron && git pull origin HEAD )
 }
 
-update_plugin_np_noscroll()
-{
-    echo "Updating: np_noscroll"
-    ( cd ${TTRSS_PATH}/plugins/np_noscroll && git pull origin HEAD )
-}
-
-update_theme_feedly()
-=======
 update_themes()
->>>>>>> upstream/master
 {
     echo "Updating: Themes"
-
-    # Link theme to TTRSS.
-    ln -f -s ${TTRSS_PATH}/themes/feedly-git/feedly ${TTRSS_PATH}/themes/feedly
-    ln -f -s ${TTRSS_PATH}/themes/feedly-git/feedly.css ${TTRSS_PATH}/themes/feedly.css
-    ln -f -s ${TTRSS_PATH}/themes/feedly-git/feedly-night.css ${TTRSS_PATH}/themes/feedly-night.css
-
-}
 
     ( cd ${TTRSS_PATH_THEMES}/levito-feedly-git && git pull origin HEAD )
     ( cd ${TTRSS_PATH_THEMES}/gravemind-feedly-git && git pull origin HEAD )
@@ -64,7 +54,6 @@ update_themes()
     ln -f -s ${TTRSS_PATH_THEMES}/gravemind-feedly-git/feedlish.css.map
     ln -f -s ${TTRSS_PATH_THEMES}/gravemind-feedly-git/feedlish-night.css
     ln -f -s ${TTRSS_PATH_THEMES}/gravemind-feedly-git/feedlish-night.css.map
->>>>>>> upstream/master
 }
 
 update_common()
@@ -89,13 +78,8 @@ update_common()
 update_ttrss
 update_plugin_mobilize
 update_plugin_feediron
-<<<<<<< HEAD
 update_plugin_np_noscroll
-update_theme_feedly
-update_theme_breeze
-=======
 update_themes
->>>>>>> upstream/master
 update_common
 
 echo "Update: Done"
