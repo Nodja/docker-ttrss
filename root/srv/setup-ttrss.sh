@@ -69,7 +69,7 @@ setup_ttrss()
 
         mkdir -p ${TTRSS_PATH_PLUGINS}
         git clone --depth=1 https://github.com/sepich/tt-rss-mobilize.git ${TTRSS_PATH_PLUGINS}/mobilize
-        git clone --depth=1 https://github.com/m42e/ttrss_plugin-feediron.git ${TTRSS_PATH_PLUGINS}/feediron
+        git clone --depth=1 https://github.com/feediron/ttrss_plugin-feediron.git ${TTRSS_PATH_PLUGINS}/feediron
 	git clone --depth=1 https://github.com/CorePoint/np_noscroll.git ${TTRSS_PATH}/plugins/np_noscroll
  
 	mkdir -p ${TTRSS_PATH_THEMES}
